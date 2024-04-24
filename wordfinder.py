@@ -25,13 +25,6 @@ class WordFinder:
 
 
 class SpecialWordFinder(WordFinder):
-    def __init__(self, filepath):
-        """Take a filepath and read a file that contains 1 word per line,
-        create a list of the words, prints the number of words read,
-        and filters the word_list to have only words that do not begin
-        with a # or blank space"""
-        super().__init__(filepath)
-
     def __repr__(self):
         return f"""
         <SpecialWordFinder length of word_list ={len(self.word_list)}>"""
@@ -40,7 +33,11 @@ class SpecialWordFinder(WordFinder):
         """Take a list of words and return a new list of the words that do
         not start with # or a blank space"""
 
+        word_list = super().get_words_in_file(file)
+
+    # TODO: let the parent class deal with its responsibilities and make the
+    # subclass deal only with what's going to be different
         return [
-            line.rstrip() for line in file
-            if len(line.rstrip()) != 0 and line[0] != "#" and line != " "
+            word for word in word_list
+            if len(word) != 0 and word[0] != "#" and word != " "
         ]
