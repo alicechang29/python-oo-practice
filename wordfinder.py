@@ -2,7 +2,13 @@ import random as random_library
 
 
 class WordFinder:
-    """Word Finder: finds random words from a dictionary."""
+    """Word Finder: finds random words from a dictionary.
+    >>> wf = WordFinder("words.txt")
+    9 words read
+    >>> random_library.seed(1)
+    >>> wf.random()
+    'kale'
+    """
 
     def __init__(self, filepath):
         """Take a filepath and read a file that contains 1 word per line,
@@ -25,12 +31,15 @@ class WordFinder:
 
 
 class SpecialWordFinder(WordFinder):
+    """Special Word Finder: finds random words from a dictionary and ignores
+    commens and empty lines."""
+
     def __repr__(self):
         return f"""
         <SpecialWordFinder length of word_list ={len(self.word_list)}>"""
 
     def get_words_in_file(self, file):
-        """Take a list of words and return a new list of the words that do
+        """Take a file and returns a new list of the words that do
         not start with # or a blank space"""
 
         word_list = super().get_words_in_file(file)
